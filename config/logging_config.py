@@ -1,3 +1,3 @@
 import logging
-logger = logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]Y: %(message)s',
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s]: %(message)s',
                              filemode='w', filename='log_all.log')

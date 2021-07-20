@@ -62,6 +62,7 @@ class Item(Base):
         self.product_name = product_name,
         self.cost = cost
 
+
 class Category(Base):
     __tablename__ = 'category'
 
