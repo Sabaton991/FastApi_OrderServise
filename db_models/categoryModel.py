@@ -9,8 +9,7 @@ class Category(Base):
 
     id_category = Column(Integer, Sequence('id_cat_seq'), primary_key=True)
     category_name = Column(String(31), nullable=False)
-    category = relationship(Item, passive_updates=True,
-                          backref="category")
+    category = relationship(Item, passive_updates=True, backref="category.id_category")
 
     def __init__(self, name):
         self.category_name = name

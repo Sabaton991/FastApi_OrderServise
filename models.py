@@ -3,6 +3,9 @@ from sqlalchemy.orm import relationship, backref
 from config.db_config import Base
 import datetime
 
+address_user_table = Table('address_user', Base.metadata, Column('user_id', Integer, ForeignKey('user.id_user')),
+                           Column('address_id', Integer, ForeignKey('addresses.id_address')))
+
 
 class Addresses(Base):
     __tablename__ = 'addresses_1'
@@ -39,8 +42,7 @@ class Order(Base):
     id_order = Column(Integer, Sequence('id_order_seq'), primary_key=True)
     status = Column(String(15), nullable=False, default='Not open')
     final_cost = Column(Numeric(12, 2), nullable=False)
-    order = relationship(OrderItem, passive_updates=True,
-                            backref="order")
+    order = relationship(OrderItem, passive_updates=True, backref="order")
 
     def __init__(self, final_cost):
         self.final_cost = final_cost
@@ -54,8 +56,7 @@ class Item(Base):
                        nullable=False)
     product_name = Column(String(63), nullable=False)
     cost = Column(Numeric(12, 2), nullable=False)
-    product = relationship(OrderItem, passive_updates=True,
-                            backref="product")
+    product = relationship(OrderItem, passive_updates=True, backref="product")
 
     def __init__(self, id_category, product_name, cost):
         self.id_category = id_category
@@ -69,14 +70,10 @@ class Category(Base):
     id_category = Column(Integer, Sequence('id_cat_seq'), primary_key=True)
     category_name = Column(String(31), nullable=False)
     category = relationship(Item, passive_updates=True,
-                          backref="category")
+                            backref="category")
 
     def __init__(self, name):
         self.category_name = name
-
-
-address_user_table = Table('address_user', Base.metadata, Column('user_id', Integer, ForeignKey('user.id_user')),
-                           Column('address_id', Integer, ForeignKey('addresses.id_address')))
 
 
 class User(Base):
