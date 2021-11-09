@@ -4,7 +4,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from starlette import status
 
-from db_models.tokenModel import Token
+from schemas.tokenSchemas import Token
 from db_models.userModel import User
 from routers import items
 from jose import jwt
