@@ -12,7 +12,7 @@ class User(Base):
     __tablename__ = 'user'
 
     id_user = Column(Integer, Sequence('id_user_seq'), primary_key=True)
-    password = Column(String(255), nullable=False)
+    hashed_password = Column(String(255), nullable=False)
     surname = Column(String(63), nullable=False)
     name = Column(String(63), nullable=False)
     patronymic = Column(String(63), nullable=True)
@@ -22,8 +22,8 @@ class User(Base):
     email = Column(String, nullable=False)
     subs = relationship(Addresses, secondary=address_user_table, backref=backref('addr'), lazy='dynamic')
 
-    def __init__(self, password, surname, name, last_name, gender, phone, email):
-        self.password = password
+    def __init__(self, hashed_password, surname, name, last_name, gender, phone, email):
+        self.hashed_password = hashed_password
         self.surname = surname
         self.name = name
         self.last_name = last_name
